@@ -1,0 +1,100 @@
+######################################
+## on the CA machine (probably offline)
+# generate the CA key (keep it small for teaching purposes)
+
+# generate root CA's private key 
+ipsec pki --gen \
+  --type rsa \
+  --size 1024 \
+  --outform der > private/CA_Key.der
+  
+chmod 600 private/CA_Key.der
+
+# generate root CA's self-signed cert, related to the private key
+ipsec pki --self --ca \
+  --lifetime 3650 \
+  --in private/CA_Key.der \
+  --type rsa \
+  --dn "C=UK, O=University of Warwick - Cyber Security Centre, OU=Cyber Teaching Examples, CN=(Untrustworthy) CSC Tutorial Certificate Authority" \
+  --outform der > cacerts/CA_Cert.der
+
+# verify it looks right
+ipsec pki --print --in cacerts/CA_Cert.der
+
+#########################################
+## for one end of the VPN (rA in our case)
+
+# generate the private key for one end of the vpn
+ipsec pki --gen \
+  --type rsa \
+  --size 1024 \
+  --outform der > private/vpn_rA_Key.der
+  
+chmod 600 private/vpn_rA_Key.der
+
+# generate the related cert signing request
+ipsec pki --pub \
+  --in private/vpn_rA_Key.der \
+  --type rsa \
+  --outform der > csr/vpn_rA_csr.der
+
+################################################
+# then get it signed / issued as a certificate by the CA
+# note the common name CN or the subject alternate name (--san)
+# MUST match the public domain name or ip addr of the server
+ipsec pki --issue \
+  --in csr/vpn_rA_csr.der \
+  --lifetime 365 \
+  --cacert cacerts/CA_Cert.der \
+  --cakey private/CA_Key.der \
+  --dn "C=UK, O=CSC at Uni of Warwick, OU=Cyber Teaching Examples, CN=ra.cyber.test" \
+  --san 198.51.100.1  \
+  --san @198.51.100.1 \
+  --flag serverAuth \
+  --flag ikeIntermediate \
+  --outform der > certs/vpn_rA_Cert.der
+  
+# see how it looks
+ipsec pki --print --in certs/vpn_rA_Cert.der
+
+# or with openssl
+openssl x509 -inform DER -in certs/vpn_rA_Cert.der -noout -text
+
+##################################
+# do similar for the other end of the vpn ie rB
+
+# generate the private key for other end of the vpn
+ipsec pki --gen \
+  --type rsa \
+  --size 1024 \
+  --outform der > private/vpn_rB_Key.der
+
+# generate the related cert signing request
+ipsec pki --pub \
+  --in private/vpn_rB_Key.der \
+  --type rsa \
+  --outform der > csr/vpn_rB_csr.der
+
+################################################
+# then get it signed / issued as a certificate by the CA
+# note the common name CN or the subject alternate name (--san)
+# MUST match the public domain name or ip addr of the server
+ipsec pki --issue \
+  --in csr/vpn_rB_csr.der \
+  --lifetime 365 \
+  --cacert cacerts/CA_Cert.der \
+  --cakey private/CA_Key.der \
+  --dn "C=UK, O=CSC at Uni of Warwick, OU=Cyber Teaching Examples, CN=rb.cyber.test" \
+  --san 198.51.100.2  \
+  --san @198.51.100.2 \
+  --flag serverAuth \
+  --flag ikeIntermediate \
+  --outform der > certs/vpn_rB_Cert.der
+  
+# see how it looks
+ipsec pki --print --in certs/vpn_rB_Cert.der
+
+# or with openssl
+openssl x509 -inform DER -in certs/vpn_rB_Cert.der -noout -text
+
+
