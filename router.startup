@@ -1,0 +1,14 @@
+# Router
+
+# Internal
+ip link set dev eth1 address 00:00:00:99:99:01
+ip link add 192.168.87.1/24 dev eth1
+ip link set up dev eth1
+
+# External
+ip link set dev eth2 address 11:00:00:00:00:02
+ip link add 213.1.133.96/27 dev eth2
+ip link set up dev eth2
+
+ip route add default via 213.1.133.97
+

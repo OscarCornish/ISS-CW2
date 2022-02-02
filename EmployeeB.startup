@@ -1,4 +1,7 @@
-ip link set dev eth0 address b0:bb:bb:bb:bb
-ip addr add 10.0.0.2/27 dev eth0
-ip link set up dev eth0
-ip route add default via 10.0.0.1
+# Employee B
+
+ip link set dev eth1 address bb:bb:bb:00:00:02
+ip link add 192.168.1.2/24
+ip link set up dev eth1
+
+ip route add default via 192.168.1.1

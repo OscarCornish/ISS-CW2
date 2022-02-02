@@ -1,9 +1,16 @@
-ip link set dev eth10 address 00:00:00:00:00:10
-ip link set dev eth11 address 00:00:00:00:00:11
+# Internet
 
-ip addr add 192.0.2.1/24 dev eth10
-ip link set up dev eth10
-ip addr add 198.51.100.1/24 dev eth11
-ip link set up dev eth11
+# Connection to organisation (ispO)
+ip link set dev eth0 address 11:00:00:11:00:01
+ip link add 213.1.133.97/27 dev eth0
+ip link set up dev eth0
 
-# iptables -t nat -A POSTROUTING -o eth20 -j MASQUERADE
+# Connection to HotelA (ispA)
+ip link set dev eth1 address aa:aa:aa:11:00:01
+ip link add 222.235.240.112/28 dev eth1
+ip link set up dev eth1
+
+# Connection to HotelB (ispB)
+ip link set dev eth2 address bb:bb:bb:11:00:01
+ip link add 104.212.7.160/28 dev eth2
+ip link set up dev eth2
