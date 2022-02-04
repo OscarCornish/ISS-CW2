@@ -1,0 +1,6 @@
+ip link set dev eth1 address aa:aa:aa:00:01
+
+ip addr add 192.168.1.2/24 dev eth1
+ip link set up dev eth1
+
+ip route add default via 192.168.1.1

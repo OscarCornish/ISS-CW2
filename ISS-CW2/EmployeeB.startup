@@ -1,0 +1,7 @@
+# Employee B
+
+ip link set dev eth1 address bb:bb:bb:00:00:02
+ip link add 192.168.1.2/24
+ip link set up dev eth1
+
+ip route add default via 192.168.1.1

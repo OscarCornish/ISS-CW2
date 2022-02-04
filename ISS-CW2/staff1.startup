@@ -1,0 +1,5 @@
+ip link set dev eth1 address b0:bb:bb:bb:bb
+
+ip addr add 192.168.87.2/28 dev eth1
+ip link set up dev eth1
+ip route add default via 192.168.87.2
