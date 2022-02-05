@@ -1,13 +1,28 @@
 # Hotel B
 
 # Internal
-ip link set dev eth1 address bb:bb:bb:00:00:01
-ip link add 192.168.1.1/24 dev eth1
+ip link set dev eth1 address 00:bb:bb:00:00:01
+ip a add 192.168.1.1/24 dev eth1
 ip link set up dev eth1
 
 # External
-ip link set dev eth2 address bb:bb:bb:10:00:01
-ip link add 104.212.7.162/28 dev eth2
+ip link set dev eth2 address 00:bb:bb:10:00:01
+ip a add 104.212.7.162/28 dev eth2
 ip link set up dev eth2
 
 ip route add default via 104.212.7.161/28
+
+# iptables
+
+iptables --policy INPUT DROP
+iptables --policy FORWARD DROP
+iptables --policy OUTPUT DROP
+
+# Simple rules to act like router
+iptables -t nat -A POSTROUTING -o eth2 -j MASQUERADE
+iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A FORWARD -i eth1 -j ACCEPT
+
+# Allow pings
+iptables -A INPUT -p ICMP -j ACCEPT
+iptables -A OUTPUT -p ICMP -j ACCEPT
