@@ -1,0 +1,6 @@
+# eth0
+auto eth0
+iface eth0 inet static
+    address 213.1.133.100/28
+    netmask 255.255.255.240
+    gateway 213.1.133.100
