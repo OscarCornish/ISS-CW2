@@ -36,6 +36,7 @@
 │                │        │          │
 └────────────────┘        └──────────┘
 ```
+The benefits to using a subordinate CA is that the organisation can issue and revoke new certificates quickly and easily, they do not rely on the 
 
 ## Creating the certificates:
 
