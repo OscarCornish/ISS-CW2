@@ -14,27 +14,22 @@ C  = UK
 ST = Coventry
 L  = Coventry
 O  = Nobs
-CN = Nobs Strongswan
+CN = EmployeeB
 
 [v3_req]
 basicConstraints     = CA:FALSE
 subjectKeyIdentifier = hash
 keyUsage             = digitalSignature, keyEncipherment
 extendedKeyUsage     = clientAuth, serverAuth
-subjectAltName       = @alt_names
-
-[alt_names]
-IP.1  = 213.1.133.98
-DNS.1 = gw1.nobs.cyber.test
 EOF
 
 # Make CSR + key
 openssl req \
-        -newkey rsa:1024 -nodes -keyout etc/ipsec.d/private/strongswan.key \
-        -subj "/C=UK/ST=Coventry/L=Coventry/O=Nobs/CN=Nobs Strongswan" \
+        -newkey rsa:1024 -nodes -keyout etc/ipsec.d/private/EmployeeB.key \
+        -subj "/C=UK/ST=Coventry/L=Coventry/O=Nobs/CN=EmployeeB" \
         -config "openssl.cnf" -extensions v3_req \
-        -sha256 -out strongswan.csr
+        -sha256 -out EmployeeB.csr
 
-chmod 400 etc/ipsec.d/private/strongswan.key
+chmod 400 etc/ipsec.d/private/EmployeeB.key
 
 # Send to subordinate CA for signing

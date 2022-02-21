@@ -1,0 +1,10 @@
+distinguished_name = req_distinguished_name
+req_extensions = v3_req
+
+[req_distinguished_name]
+C  = UK
+
+[ v3_req ]
+basicConstraints        = critical, CA:TRUE, pathlen:1
+subjectKeyIdentifier    = hash
+keyUsage                = critical, cRLSign, digitalSignature, keyCertSign

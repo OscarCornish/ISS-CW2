@@ -6,15 +6,10 @@ C  = UK
 ST = Coventry
 L  = Coventry
 O  = Nobs
-CN = Nobs Strongswan
+CN = EmployeeB
 
 [v3_req]
 basicConstraints     = CA:FALSE
 subjectKeyIdentifier = hash
 keyUsage             = digitalSignature, keyEncipherment
 extendedKeyUsage     = clientAuth, serverAuth
-subjectAltName       = @alt_names
-
-[alt_names]
-IP.1  = 213.1.133.98
-DNS.1 = gw1.nobs.cyber.test
