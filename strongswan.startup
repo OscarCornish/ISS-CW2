@@ -4,3 +4,7 @@ ip a add 192.168.87.3/24 dev eth1
 ip link set up dev eth1
 
 ip route add default via 192.168.87.1
+
+# Iptables rules for vpn clients
+
+iptables -t nat -I POSTROUTING -o eth1 -j MASQUERADE
