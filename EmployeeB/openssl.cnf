@@ -1,0 +1,15 @@
+distinguished_name = req_distinguished_name
+req_extensions = v3_req
+
+[req_distinguished_name]
+C  = UK
+ST = Coventry
+L  = Coventry
+O  = Nobs
+CN = EmployeeB
+
+[v3_req]
+basicConstraints     = CA:FALSE
+subjectKeyIdentifier = hash
+keyUsage             = digitalSignature, keyEncipherment
+extendedKeyUsage     = clientAuth, serverAuth

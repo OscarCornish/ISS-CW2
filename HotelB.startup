@@ -10,7 +10,7 @@ ip link set dev eth2 address 00:bb:bb:10:00:01
 ip a add 104.212.7.162/28 dev eth2
 ip link set up dev eth2
 
-ip route add default via 104.212.7.161/28
+ip route add default via 104.212.7.161
 
 # iptables
 

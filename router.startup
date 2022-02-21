@@ -27,7 +27,7 @@ iptables -A FORWARD -d 192.168.87.3 -j ACCEPT
 
 ## WireGuard rules
 
-iptables -t nat -A PREROUTING -i eth2 -d 213.1.133.98 -j DNAT --to-destination 192.168.87.4 # gw2 -> wireguard
+iptables -t nat -A PREROUTING -i eth2 -d 213.1.133.99 -j DNAT --to-destination 192.168.87.4 # gw2 -> wireguard
 iptables -A FORWARD -d 192.168.87.4 -j ACCEPT
 
 ## NAT Rules
