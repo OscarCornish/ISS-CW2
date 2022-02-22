@@ -1,0 +1,2 @@
+ifup eth0
+/etc/init.d/apache2 start
