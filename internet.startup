@@ -14,3 +14,8 @@ ip link set up dev eth1
 ip link set dev eth2 address 00:bb:bb:11:00:01
 ip a add 104.212.7.161/28 dev eth2
 ip link set up dev eth2
+
+# Dns server (ispD)
+ip link set dev eth3 address 00:dd:dd:11:00:01
+ip a add 8.8.8.9/31 dev eth3
+ip link set up dev eth3
