@@ -7,9 +7,10 @@ ip link set up dev eth1
 
 # External
 ip link set dev eth2 address 00:11:00:00:00:02
-ip a add 213.1.133.100/27 dev eth2 # .100 will be the primary address
+ip a add 213.1.133.101/27 dev eth2 # .101 will be the primary address
 ip a add 213.1.133.98/27 dev eth2
 ip a add 213.1.133.99/27 dev eth2
+ip a add 213.1.133.100/27 dev eth2
 ip link set up dev eth2
 
 ip route add default via 213.1.133.97
@@ -29,6 +30,11 @@ iptables -A FORWARD -d 192.168.87.3 -j ACCEPT
 
 iptables -t nat -A PREROUTING -i eth2 -d 213.1.133.99 -j DNAT --to-destination 192.168.87.4 # gw2 -> wireguard
 iptables -A FORWARD -d 192.168.87.4 -j ACCEPT
+
+## WWW rules
+
+iptables -t nat -A PREROUTING -i eth2 -d 213.1.133.100 -j DNAT --to-destination 192.168.87.5 # www -> ext-www
+iptables -A FORWARD -d 192.168.87.5 -j ACCEPT
 
 ## NAT Rules
 
