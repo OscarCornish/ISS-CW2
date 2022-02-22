@@ -1,6 +1,6 @@
 # external dns
 ip link set dev eth1 address 00:dd:dd:11:00:11
-ip a add 8.8.8.8 dev eth1
+ip a add 8.8.8.8/31 dev eth1
 ip link set up dev eth1
 
 ip route add default via 8.8.8.9

@@ -6,7 +6,7 @@ C  = UK
 ST = Coventry
 L  = Coventry
 O  = Nobs
-CN = EmployeeB
+CN = EmployeeB3
 
 [v3_req]
 basicConstraints     = CA:FALSE
